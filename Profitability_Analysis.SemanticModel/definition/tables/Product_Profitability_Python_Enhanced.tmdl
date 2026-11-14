@@ -1,0 +1,151 @@
+table Product_Profitability_Python_Enhanced
+	lineageTag: 6d3ca22e-9306-4c0c-a221-726102345d8d
+
+	column Product_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: e5099294-8028-4484-85ad-93aaf39add40
+		summarizeBy: count
+		sourceColumn: Product_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Name
+		dataType: string
+		lineageTag: 9bdc5453-22e6-4944-96f9-02443fbb631e
+		summarizeBy: none
+		sourceColumn: Product_Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: 5ebca5d0-ac52-430f-8032-1656debe2e1d
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column Units_Sold
+		dataType: int64
+		formatString: 0
+		lineageTag: 40505557-8eb8-4135-946b-b7792648a993
+		summarizeBy: sum
+		sourceColumn: Units_Sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column Revenue
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 6ed41b78-bd15-48bf-a7e8-9050b6780f2e
+		summarizeBy: sum
+		sourceColumn: Revenue
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_Cost
+		dataType: double
+		lineageTag: 2459feca-1059-49e7-8a2e-00984d2e7668
+		summarizeBy: sum
+		sourceColumn: Total_Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Gross_Profit
+		dataType: double
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 2725abfb-4fdc-4254-a2ca-cd0516ef9479
+		summarizeBy: sum
+		sourceColumn: Gross_Profit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gross_Margin_Pct
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 39302403-9641-4993-ba1e-c6e624425e05
+		summarizeBy: sum
+		sourceColumn: Gross_Margin_Pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column Avg_Discount_Pct
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: b2c9719e-9277-4770-b362-eccdcd0a5168
+		summarizeBy: sum
+		sourceColumn: Avg_Discount_Pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column Returned_Units
+		dataType: int64
+		formatString: 0
+		lineageTag: b3300d67-86c4-4e11-82ec-4b7948d51111
+		summarizeBy: sum
+		sourceColumn: Returned_Units
+
+		annotation SummarizationSetBy = Automatic
+
+	column Return_Value
+		dataType: double
+		lineageTag: 5365b16b-a3d1-436a-be81-68c6c261118c
+		summarizeBy: sum
+		sourceColumn: Return_Value
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Return_Rate_Pct
+		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 3ea63c10-1dea-44e4-8d1b-7878a83a0c3a
+		summarizeBy: sum
+		sourceColumn: Return_Rate_Pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit_Per_Unit
+		dataType: double
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: df7a35f7-c384-4b12-9453-dcca9dd27640
+		summarizeBy: sum
+		sourceColumn: Profit_Per_Unit
+
+		annotation SummarizationSetBy = Automatic
+
+	column Product_Segment
+		dataType: string
+		lineageTag: e500e86d-b703-4c21-8f62-204c5ec0c943
+		summarizeBy: none
+		sourceColumn: Product_Segment
+
+		annotation SummarizationSetBy = Automatic
+
+	column Profit_Rank
+		dataType: int64
+		formatString: 0
+		lineageTag: 15c45a0d-1ba4-489d-9412-f2c89eb12b87
+		summarizeBy: sum
+		sourceColumn: Profit_Rank
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product_Profitability_Python_Enhanced = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\HP\OneDrive - Institute of Business Administration\Documents\Data\Portfolio Projects\2026_Advanced_Projects\Sales_Profitability_Intelligence_Dataset\Sales_Profitability_Project\Product_Profitability_Python_Enhanced.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"Product_ID", Int64.Type}, {"Product_Name", type text}, {"Category", type text}, {"Units_Sold", Int64.Type}, {"Revenue", type number}, {"Total_Cost", type number}, {"Gross_Profit", type number}, {"Gross_Margin_Pct", type number}, {"Avg_Discount_Pct", type number}, {"Returned_Units", Int64.Type}, {"Return_Value", type number}, {"Return_Rate_Pct", type number}, {"Profit_Per_Unit", type number}, {"Product_Segment", type text}, {"Profit_Rank", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

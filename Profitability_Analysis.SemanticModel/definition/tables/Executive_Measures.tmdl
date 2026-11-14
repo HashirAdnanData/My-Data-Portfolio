@@ -1,0 +1,61 @@
+table Executive_Measures
+	lineageTag: c3ae8e23-7001-4a11-8e61-49fab2c7e806
+
+	measure 'Total Revenue' =
+			
+			SUM('Product_Profitability_Python_Enhanced'[Revenue])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: b78d41fa-0507-42c1-b30b-0d1a0f4a4b07
+
+	measure 'Total Cost' =
+			
+			SUM('Product_Profitability_Python_Enhanced'[Total_Cost])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: a3bc3579-9c7f-47e9-b821-176eebedcaf0
+
+	measure 'Total Gross Profit' =
+			
+			SUM('Product_Profitability_Python_Enhanced'[Gross_Profit])
+		formatString: \$#,0;(\$#,0);\$#,0
+		lineageTag: 839b4674-77ab-433b-aae4-fe8f344986db
+
+	measure 'Gross Margin %' =
+			
+			DIVIDE(
+			    [Total Gross Profit],
+			    [Total Revenue]
+			)
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: a384fc72-100d-4e1a-91f2-04fa02838640
+
+	measure 'Total Units Sold' =
+			
+			SUM('Product_Profitability_Python_Enhanced'[Units_Sold])
+		formatString: #,0
+		lineageTag: e2be62da-4bd0-467c-9e2f-5c62083ac8df
+
+	measure 'Average Return Rate %' = ```
+			
+			    AVERAGE(
+			        'Product_Profitability_Python_Enhanced'[Return_Rate_Pct]
+			    
+			)
+			```
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 2a8e2cad-6116-4252-9828-566549899e47
+
+	column Column
+		formatString: 0
+		lineageTag: 1ffad474-ba73-4c8a-9dc7-89c521e934a3
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [Column]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Executive_Measures = calculated
+		mode: import
+		source = Row("Column", BLANK())
+
+	annotation PBI_Id = b4aaa4e9ad40466ca7ef3d9d1f774561
+
