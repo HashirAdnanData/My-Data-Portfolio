@@ -162,6 +162,6 @@ A synthetic enterprise sales dataset, built with realistic business patterns and
 ## Author
 
 **Hashir Adnan**: Data Analyst
-[LinkedIn]([https://www.linkedin.com/in/hashiradnan/]) · [Email](hashir.adnan@gmail.com)
+[LinkedIn]((https://www.linkedin.com/in/hashiradnan/)) · [Email](hashir.adnan@gmail.com)
 
 <sub>If you found this project useful, consider giving it a ⭐.</sub>
